@@ -1,0 +1,39 @@
+.body {
+  padding: 20px 30px;
+  font-family: sans-serif;
+}
+
+.header {
+  text-align: center;
+}
+
+.game-body {
+  width: 370px;
+  margin: auto;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.restart {
+  clear: both;
+  text-align: center;
+}
+.restart-btn {
+  margin-top: 25px;
+  padding: 10px 20px;
+  background: #0080ff;
+  color: white;
+  border: 1px solid #0080ff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.square:hover {
+  cursor: pointer;
+}
