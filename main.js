@@ -12,8 +12,14 @@ loadCrossOrCircle = function (e) {
     if (elem.tagName == 'DIV') {
         elem.innerHTML = isCross ? crossPath : circlePath;
         assignPosition(elem.id);
-        checkMatch(isCross, isCross ? crossContainer : circleContainer);
-        isCross = !isCross;
+        setTimeout(() => {
+            var isMatched = checkMatch(isCross, isCross ? crossContainer : circleContainer);
+            if (isMatched) {
+                restart();
+                return;
+            }
+            isCross = !isCross;
+        }, 200);
     }
 }
 
@@ -33,20 +39,17 @@ function assignPosition(id) {
 
 function checkMatch(is_cross, current_track) {
     var currentSorted = current_track.slice().sort();
-    var isMatched;
+    if (currentSorted.length < 3) return;
+    var isMatched, returnVal;
     matchingCombination.forEach(arr => {
         var arrayToMatch = arr.slice().sort();
-        if (arrayToMatch.length === currentSorted.length) {
-            isMatched = arrayToMatch.every(function(value, index) {
-                return value === currentSorted[index];
-            });
-            console.log(isMatched, is_cross ? 'cross' : 'circle');
-            if (isMatched) {
-                alert(`${is_cross ? 'CROSS' : 'CIRCLE'} WINS!!!!`);
-                restart();
-            }
+        isMatched = arrayToMatch.every(numb => currentSorted.findIndex(current => current === numb) >= 0);
+        if (isMatched) {
+            returnVal = true;
+            alert(`${is_cross ? 'CROSS' : 'CIRCLE'} WINS!!!!`);
         }
     });
+    return returnVal;
 }
 
 function restart() {
